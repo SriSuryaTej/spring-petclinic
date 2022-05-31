@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'JDK11_MVN_SONAR_JFROGs' }
+    agent { label 'JDK11_MVN_SONAR_JFROG' }
 	tools {
 		maven 'MVN_3.8.5'
 	}
