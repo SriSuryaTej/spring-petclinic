@@ -26,7 +26,7 @@ pipeline {
                     rtMavenRun (
                         tool: 'MVN_3.8.5', 
                         pom: 'pom.xml',
-                        goals: 'clean install',
+                        goals: 'clean package',
                         deployerId: "MAVEN_DEPLOYER"
                     )
                     stash includes: '**/*.jar', name: 'spcjar'
