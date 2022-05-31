@@ -43,7 +43,7 @@ pipeline {
         stage ('copy to other node') {
             agent { label 'MASTER'}
             steps {
-                unstash 'spcjar'
+                unstash '*.jar'
             }
         }
     }
