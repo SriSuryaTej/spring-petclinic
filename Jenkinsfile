@@ -13,7 +13,7 @@ pipeline {
             steps {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
-                    serverId: 'JFROG-OSS',
+                    serverId: 'JFROG_OSS',
                     releaseRepo: 'surya-maven-releases',
                     snapshotRepo: 'surya-maven-snapshots'
                 )
@@ -36,7 +36,7 @@ pipeline {
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: 'JFROG-OSS'
+                    serverId: 'JFROG_OSS'
                 )
             }
         }
