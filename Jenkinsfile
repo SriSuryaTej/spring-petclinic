@@ -22,7 +22,7 @@ pipeline {
         }
         stage ('Exec Maven') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'JFROG_ARTIFACTORY', usernameVariable: 'admin', passwordVariable: 'Jfrog@123')]) {
+                withCredentials([usernamePassword(credentialsId: 'JFROG_OSS', usernameVariable: 'admin', passwordVariable: 'Jfrog@123')]) {
                     rtMavenRun (
                         tool: 'MVN_3.8.5', 
                         pom: 'pom.xml',
