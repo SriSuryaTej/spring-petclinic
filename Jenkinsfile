@@ -29,7 +29,6 @@ pipeline {
                         goals: 'clean package',
                         deployerId: "MAVEN_DEPLOYER"
                     )
-                    stash includes: '**/*.jar', name: 'spcjar'
                 }
             }
         }
@@ -38,12 +37,6 @@ pipeline {
                 rtPublishBuildInfo (
                     serverId: 'JFROG_OSS'
                 )
-            }
-        }
-        stage ('copy to other node') {
-            agent { label 'MASTER'}
-            steps {
-                unstash 'spcjar'
             }
         }
     }
