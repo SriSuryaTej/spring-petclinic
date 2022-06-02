@@ -38,17 +38,9 @@ pipeline {
                     sh "/usr/local/apache-maven-3.8.5/bin/mvn clean package sonar:sonar"
 					echo "${env.SONAR_HOST_URL}"
                     timeout(time: 1, unit: 'HOURS') {
-                        waitForQualityGate abortPipeline: true, credentialsId: 'SONAR_TOKEN'
+                    waitForQualityGate abortPipeline: true, credentialsId: 'SONAR_TOKEN'
                     }
                 }
-        }
-    }
-
-        stage ('Publish build info') {
-            steps {
-                rtPublishBuildInfo (
-                    serverId: 'JFROG_OSS'
-                )
             }
         }
     }
