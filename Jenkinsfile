@@ -31,6 +31,8 @@ pipeline {
                     )
                 }
             }
+        }
+        stage('Quality Check'){
              steps {
                 withSonarQubeEnv(installationName: 'SONAR_9.4.0', envOnly: true, credentialsId: 'SONAR_TOKEN') {
                     sh "/usr/local/apache-maven-3.8.4/bin/mvn clean package sonar:sonar"
@@ -38,7 +40,9 @@ pipeline {
                     timeout(time: 1, unit: 'HOURS') {
                         waitForQualityGate abortPipeline: true, credentialsId: 'SONAR_TOKEN'
                     }
+                }
         }
+    }
 
         stage ('Publish build info') {
             steps {
@@ -46,8 +50,6 @@ pipeline {
                     serverId: 'JFROG_OSS'
                 )
             }
-        }
-    }
         }
     }
 }
