@@ -37,8 +37,6 @@ pipeline {
                 withSonarQubeEnv(installationName: 'SONAR_SCANNER', envOnly: true, credentialsId: 'SONAR_TOKEN') {
                     sh "mvn clean package sonar:sonar"
 					echo "${env.SONAR_HOST_URL}"
-                    timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true, credentialsId: 'SONAR_TOKEN'
                     }
                 }
             }
