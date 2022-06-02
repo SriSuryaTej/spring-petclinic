@@ -44,7 +44,7 @@ pipeline {
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: 'JFROG-OSS'
+                    serverId: 'JFROG_OSS'
                 )
             }
         }
