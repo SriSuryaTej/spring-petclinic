@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'JDK11_MVN_SONAR_JFROG' }
+    agent { label 'JDK11_MVN' }
 	tools {
 		maven 'MVN_3.8.5'
 	}
@@ -31,7 +31,15 @@ pipeline {
                     )
                 }
             }
+             steps {
+                withSonarQubeEnv(installationName: 'SONAR_9.4.0', envOnly: true, credentialsId: 'SONAR_TOKEN') {
+                    sh "/usr/local/apache-maven-3.8.4/bin/mvn clean package sonar:sonar"
+					echo "${env.SONAR_HOST_URL}"
+                    timeout(time: 1, unit: 'HOURS') {
+                        waitForQualityGate abortPipeline: true, credentialsId: 'SONAR_TOKEN'
+                    }
         }
+
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
