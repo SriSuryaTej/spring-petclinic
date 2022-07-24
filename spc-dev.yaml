@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: 
+  name: spring-petclinic
 spec:
-  name: 
-  type: 
+  name: spring-petclinic
+  type: LoadBalancer
   ports:
   - port: 8080
 ---
@@ -20,12 +20,12 @@ spec:
   replicas: 2
   selector: 
     matchLabels:
-      app: spring
+      app: spring-petclinic
   template:
     metadata:
-      name: spring
+      name: spring-petclinic
       labels:
-        app: spring
+        app: spring-petclinic
     spec:
       containers:
         - image: optimussurya/project_repo/spring-petclinic
