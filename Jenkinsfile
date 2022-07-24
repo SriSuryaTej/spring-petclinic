@@ -17,9 +17,10 @@ pipeline{
         }
       }
     }
+    }
     
     agent { label 'K8s' }
-    stages{
+    stages {
         stage('Pulling Docker Image') {
             when{
                 branch 'dev'
@@ -58,5 +59,4 @@ pipeline{
                 }
             }
   }
-}
 }
