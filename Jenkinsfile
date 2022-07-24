@@ -1,14 +1,14 @@
-pipeline{ 
-    agent{ label 'docker' } 
+pipeline{  
+    agent any
     stages{
         stage('Docker Build') {
-            
+        agent{ label 'docker' }    
                 steps {
                    sh 'docker build -t spring-petclinic:latest .'
       }
     }
         stage('Docker Push') {
-          
+            agent{ label 'docker' }
                 steps {
                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
@@ -17,11 +17,8 @@ pipeline{
         }
       }
     }
-    }
-    
-    agent { label 'K8s' }
-    stages {
-        stage('Pulling Docker Image') {
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
             when{
                 branch 'dev'
             }
@@ -30,8 +27,8 @@ pipeline{
 
                 }
             }
-        stage('Pulling Docker Image') {
-          
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
             when{
                 branch 'qa'
             }
@@ -40,7 +37,8 @@ pipeline{
 
                 }
             }
-        stage('Pulling Docker Image') {
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
             when{
                 branch 'staging'
             }
@@ -49,7 +47,8 @@ pipeline{
 
                 }
             }
-        stage('Pulling Docker Image') {
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
             when{
                 branch 'prod'
             }
