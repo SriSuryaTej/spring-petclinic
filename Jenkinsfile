@@ -16,6 +16,45 @@ pipeline{
         }
       }
     }
-       
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
+            when{
+                branch 'dev'
+            }
+                steps{
+                   sh 'kubectl apply -f spc_dev.yaml'
+
+                }
+            }
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
+            when{
+                branch 'qa'
+            }
+                steps{
+                   sh 'kubectl apply -f spc_qa.yaml'
+
+                }
+            }
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
+            when{
+                branch 'staging'
+            }
+                steps{
+                   sh 'kubectl apply -f spc_staging.yaml'
+
+                }
+            }
+        stage('Pulling Docker Image'){
+            agent{ label 'k8s'}
+            when{
+                branch 'prod'
+            }
+                steps{
+                   sh 'kubectl apply -f spc_prod.yaml'
+
+                }
+            }
   }
 }
