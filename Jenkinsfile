@@ -19,10 +19,10 @@ pipeline{
       }
     }
         stage('Deploying application'){
-            }
-                steps{
+            steps{
                    sh 'kubectl apply -f spc_dev.yaml'
 
                 }
+        }
     }
 }
