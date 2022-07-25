@@ -1,6 +1,6 @@
 pipeline{
     triggers{
-        cron ""*/4 * * * *""
+        cron ""*/8 * * * *""
     }  
     agent{ label 'K8s'}
     stages{
