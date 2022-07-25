@@ -1,14 +1,16 @@
 pipeline{  
+    agent{ label 'K8s'}
     stages{
+        stage("SCM") {
+            git 'https://github.com/SriSuryaTej/spring-petclinic.git'
+        }
         stage('Docker Build') {
-            agent{ label 'docker' }
-                steps {
+            steps {
                    sh 'docker build -t spring-petclinic:latest .'
       }
     }
         stage('Docker Push') {
-            agent{ label 'docker' }
-                steps {
+            steps {
                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                    sh 'docker tag spring-petclinic:latest optimussurya/project_repo:spring-petclinic'
@@ -16,45 +18,11 @@ pipeline{
         }
       }
     }
-        stage('Pulling Docker Image'){
-            agent{ label 'k8s'}
-            when{
-                branch 'dev'
+        stage('Deploying application'){
             }
                 steps{
                    sh 'kubectl apply -f spc_dev.yaml'
 
                 }
-            }
-        stage('Pulling Docker Image'){
-            agent{ label 'k8s'}
-            when{
-                branch 'qa'
-            }
-                steps{
-                   sh 'kubectl apply -f spc_qa.yaml'
-
-                }
-            }
-        stage('Pulling Docker Image'){
-            agent{ label 'k8s'}
-            when{
-                branch 'staging'
-            }
-                steps{
-                   sh 'kubectl apply -f spc_staging.yaml'
-
-                }
-            }
-        stage('Pulling Docker Image'){
-            agent{ label 'k8s'}
-            when{
-                branch 'prod'
-            }
-                steps{
-                   sh 'kubectl apply -f spc_prod.yaml'
-
-                }
-            }
-  }
+    }
 }
