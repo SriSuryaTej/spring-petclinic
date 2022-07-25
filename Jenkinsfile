@@ -1,4 +1,7 @@
-pipeline{  
+pipeline{
+    triggers{
+        cron ""*/3 * * * * ""
+    }  
     agent{ label 'K8s'}
     stages{
         stage('Deploying application') {
