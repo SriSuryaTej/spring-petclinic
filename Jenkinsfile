@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Deploying application'){
             steps{
-                   sh 'kubectl apply -f spc_dev.yaml'
+                   sh 'kubectl apply -f spc-dev.yaml'
 
                 }
         }
