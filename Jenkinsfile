@@ -1,9 +1,6 @@
 pipeline{  
     agent{ label 'k8s'}
     stages{
-        stage("SCM") {
-            git 'https://github.com/SriSuryaTej/spring-petclinic.git'
-        }
         stage('Docker Build') {
             steps {
                    sh 'docker build -t spring-petclinic:latest .'
