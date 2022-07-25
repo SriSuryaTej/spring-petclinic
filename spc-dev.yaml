@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     app: spring-petclinic
-  type: LoadBalancer
+  type: NodePort
   ports:
   - port: 8080
 ---
