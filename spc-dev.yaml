@@ -6,7 +6,8 @@ metadata:
   labels:
     app: spring-petclinic
 spec:
-  name: spring-petclinic
+  selector:
+    app: spring-petclinic
   type: LoadBalancer
   ports:
   - port: 8080
