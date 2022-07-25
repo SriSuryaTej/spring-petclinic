@@ -3,6 +3,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-petclinic
+  labels:
+    app: spring-petclinic
 spec:
   name: spring-petclinic
   type: LoadBalancer
@@ -14,7 +16,7 @@ kind: Deployment
 metadata:
   name: spc
   labels:
-    app: spring
+    app: spring-petclinic
   namespace: staging
 spec:
   replicas: 2
