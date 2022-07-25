@@ -1,7 +1,7 @@
 pipeline{
     agent{ label 'K8s'}
     triggers{
-        cron ""*/2 * * * *""
+        cron ""*/4 * * * *""
     }
     stages{
         stage('Deploying application') {
