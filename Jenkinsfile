@@ -12,8 +12,13 @@ pipeline{
                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                    sh 'docker tag spring-petclinic:latest optimussurya/spring-petclinic:$BUILD_NUMBER'
                    sh 'docker push optimussurya/spring-petclinic:$BUILD_NUMBER'
+                   sh 'docker tag spring-petclinic:latest optimussurya/spring-petclinic:latest'
+                   sh 'docker push optimussurya/spring-petclinic:latest'
             }
           }
+        }
+        stage('') {
+            
         }
         stage('Deploying application'){
             steps{
