@@ -1,5 +1,5 @@
 pipeline{  
-    agent{ label 'K8s'}
+    agent any
     stages{
         stage('Docker Build') {
             steps {
