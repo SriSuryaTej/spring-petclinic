@@ -6,7 +6,7 @@ pipeline{
                    sh 'docker build -t spring-petclinic:latest .'
       }
     }
-        stage('Docker Push') {
+        stage('Pushing Image to DockerHub with Versioning') {
             steps {
                    withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
@@ -16,9 +16,6 @@ pipeline{
                    sh 'docker push optimussurya/spring-petclinic:latest'
             }
           }
-        }
-        stage('') {
-            
         }
         stage('Deploying application'){
             steps{
